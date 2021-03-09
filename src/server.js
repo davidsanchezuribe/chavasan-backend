@@ -5,7 +5,7 @@ import cors from 'cors';
 // libreria para detectar el formato json automáticamente
 import bodyParser from 'body-parser';
 
-import exampleAPI from './exampleAPI.js';
+import queueAPI from './queueAPI.js';
 import env from './env';
 import { dbInit } from './database';
 
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // para permitir el origen desde localhost:3000
 app.use(cors());
 
-app.use('/example', exampleAPI);
+app.use('/queue', queueAPI);
 
 const port = env.expressPort;
 
