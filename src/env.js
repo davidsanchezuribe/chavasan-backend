@@ -1,6 +1,6 @@
 const env = {
     expressPort: 8000,
-    mongoServer: 'sudo service mongod start',
+    mongoServer: '54.227.95.228',
     database: 'mom',
 };
 

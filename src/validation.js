@@ -1,4 +1,9 @@
-import { userExists, channelExists, checkChannelOwnership, belongsToChannelUID } from './database';
+import { 
+    userExists, 
+    channelExists, 
+    checkChannelOwnership, 
+    belongsToChannelUID 
+} from './database';
 
 export function validateChannelName(name){
     if(name === undefined){
@@ -18,14 +23,15 @@ export function validateChannelName(name){
         msg: null,
     }
 }
-export function validateUser(user){
+export async function validateUser(user){
     if(user === undefined){
         return {
             valid: false,
             msg: 'el usuario no puede ser undefined',
         }
     }
-    if(!userExists(user)){
+    const exists = await userExists(user); 
+    if(!exists){
         return {
             valid: false,
             msg: `el usuario ${user} no está registrado`,
@@ -37,9 +43,10 @@ export function validateUser(user){
     }
 }
 
-export function validateMembers(members, owner){
-    if(!validateUser(owner).valid) {
-        return validateUser(owner);
+export async function validateMembers(members, owner){
+    const validOwner = await validateUser(owner);
+    if(!validOwner.valid) {
+        return validOwner;
     }
     if(members === undefined){
         return {
@@ -66,7 +73,7 @@ export function validateMembers(members, owner){
         }
     }
     for(let index = 0; index < members.length; index++){
-        const temp = validateUser(members[index]);
+        const temp = await validateUser(members[index]);
         if(!temp.valid){
             return temp;
         }
@@ -77,7 +84,7 @@ export function validateMembers(members, owner){
     }
 }
 
-function validateChannel(uid){
+async function validateChannel(uid){
     if(uid === undefined){
         return {
             valid: false,
@@ -90,7 +97,8 @@ function validateChannel(uid){
             msg: 'El uid del canal debe ser un string',
         }
     }
-    if(!channelExists(uid)){
+    const existChannel = await channelExists(uid);
+    if(!existChannel){
         return {
             valid: false,
             msg: `el canal con uid "${uid}" no está registrado`,
@@ -102,14 +110,17 @@ function validateChannel(uid){
     }
 }
 
-export function validateChannelOwner(uid, owner){
-    if(!validateChannel(uid).valid){
-        return validateChannel(uid);
+export async function validateChannelOwner(uid, owner){
+    const validChannel = await validateChannel(uid);
+    if(!validChannel.valid){
+        return validChannel;
     }
-    if(!validateUser(owner).valid){
-        return validateUser(owner);
+    const validOwner = await validateUser(owner);
+    if(!validOwner.valid){
+        return validOwner;
     }
-    if(!checkChannelOwnership(uid, owner)){
+    const ownershipChannel = await checkChannelOwnership(uid, owner);
+    if(!ownershipChannel){
         return {
             valid: false,
             msg: `El canal con uid "${uid}" no pertenece al usuario "${owner}"`,
@@ -121,14 +132,17 @@ export function validateChannelOwner(uid, owner){
     }
 }
 
-export function validateChannelMember(uid, member){
-    if(!validateChannel(uid).valid){
-        return validateChannel(uid);
+export async function validateChannelMember(uid, member){
+    const validChannel = await validateChannel(uid);
+    if(!validChannel.valid){
+        return validChannel;
     }
-    if(!validateUser(member).valid){
-        return validateUser(member);
+    const validMember = await validateUser(member);
+    if(!validMember.valid){
+        return validMember;
     }
-    if(!belongsToChannelUID(uid, member)){
+    const channelMembership = await belongsToChannelUID(uid, member);
+    if(!channelMembership){
         return {
             valid: false,
             msg: `El miembro ${member} no pertenece al canal con id ${uid}"`,

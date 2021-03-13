@@ -18,12 +18,14 @@ app.use('/queue', queueAPI);
 
 const port = env.expressPort;
 
-app.listen(port, () => {
+/*app.listen(port, () => {
     console.log(`listen on port ${port}`);
-}); 
+});*/ 
 
-/*dbInit().then(() => {
+dbInit().then(() => {
     app.listen(port, () => {
         console.log(`listen on port ${port}`);
     }); 
-});*/
+}).catch(error => {
+    console.log(error);
+});

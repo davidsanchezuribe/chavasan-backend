@@ -24,8 +24,9 @@ queueAPI.post('/create', async (req, res) => {
         res.status(500).send(validateChannelName(name).msg); 
         return;
     }
-    if (!validateMembers(members, owner).valid) {
-        res.status(500).send(validateMembers(members, owner).msg); 
+    const validMembers = await validateMembers(members, owner);
+    if (!validMembers.valid) {
+        res.status(500).send(validMembers.msg); 
         return;
     }
     const response = createChannel(name, owner, members);
@@ -38,11 +39,12 @@ queueAPI.post('/create', async (req, res) => {
 
 queueAPI.post('/delete', async (req, res) => {
     const { uid, owner } = req.body;
-    if(!validateChannelOwner(uid, owner).valid){
-        res.status(500).send(validateChannelOwner(uid, owner).msg); 
+    const validChannelOwner = await validateChannelOwner(uid, owner);
+    if(!validChannelOwner.valid){
+        res.status(500).send(validChannelOwner.msg); 
         return;
     }
-    const response = deleteChannel(uid);
+    const response = await deleteChannel(uid);
     if(response){
         res.send(`Canal "${uid}" eliminado exitosamente`);
     } else {
@@ -52,25 +54,28 @@ queueAPI.post('/delete', async (req, res) => {
 
 queueAPI.post('/list', async (req, res) => {
     const { member } = req.body;
-    if(!validateUser(member).valid){
-        res.status(500).send(validateUser(member).msg); 
+    const validMember = await validateUser(member);
+    if(!validMember.valid){
+        res.status(500).send(validMember.msg); 
         return;
     }
-    res.send(getMessages(member));
+    const messages = await getMessages(member);
+    res.send(messages);
 
 });
 
 queueAPI.post('/sendmessage', async (req, res) => {
     const { channeluid, memberuid, content } = req.body;
-    if(!validateChannelMember(channeluid, memberuid).valid){
-        res.status(500).send(validateChannelMember(channeluid, memberuid).msg); 
+    const validChannelMember = await validateChannelMember(channeluid, memberuid);
+    if(!validChannelMember.valid){
+        res.status(500).send(validChannelMember.msg); 
         return;
     }
     if(!validateMessage(content).valid){
         res.status(500).send(validateMessage(content).msg); 
         return;  
     }
-    const response = addMessage(channeluid, memberuid, content);
+    const response = await addMessage(channeluid, memberuid, content);
     if(response){
         res.send(`Mensaje añadido exitosamente`);
     } else {
