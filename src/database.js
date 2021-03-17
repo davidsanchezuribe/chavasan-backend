@@ -72,7 +72,7 @@ function getChannelData(channel, member) {
 }
 
 export async function getMessages(member) {
-    await db.collection('queues').updateMany({ 'members.id': member }, { $set: { 'members.$[element].messages.$[].readed': true } }, { arrayFilters: [{ 'element.id': member }] });
+    //await db.collection('queues').updateMany({ 'members.id': member }, { $set: { 'members.$[element].messages.$[].readed': true } }, { arrayFilters: [{ 'element.id': member }] });
     const channels = await db.collection('queues')
         .aggregate([
             { $match: { 'members.id': member} },
