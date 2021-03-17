@@ -6,6 +6,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import queueAPI from './queueAPI.js';
+import userAPI from './userAPI.js';
+
 import env from './env';
 import { dbInit } from './database';
 
@@ -15,6 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/queue', queueAPI);
+app.use('/user', userAPI);
 
 const port = env.expressPort;
 

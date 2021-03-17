@@ -85,7 +85,6 @@ export async function getMessages(member) {
                 }
             }
         ]);
-    console.log(channels);
 
     const allMessages = [];
     await channels.forEach(channel => {
@@ -104,4 +103,9 @@ export async function addMessage(channeluid, memberuid, message) {
     };
     const response = await db.collection('queues').updateOne({ 'uid': channeluid }, { $addToSet: { 'members.$[].messages': newMessage } });
     return response.result.ok === 1;
+}
+
+export async function getUsers() {
+    const response = await db.collection('users').find().toArray();
+    return response;
 }
