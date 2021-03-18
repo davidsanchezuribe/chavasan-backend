@@ -90,6 +90,7 @@ export async function getMessages(member) {
     await channels.forEach(channel => {
         allMessages.push(getChannelData(channel, member));
     })
+    await db.collection('queues').updateMany({ 'members.id': member }, { $set: { 'members.$[element].messages': [] } }, { arrayFilters: [{ 'element.id': member }] });
     return allMessages;
 }
 
