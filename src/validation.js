@@ -84,7 +84,7 @@ export async function validateMembers(members, owner){
     }
 }
 
-async function validateChannel(uid){
+export async function validateChannel(uid){
     if(uid === undefined){
         return {
             valid: false,
@@ -146,6 +146,28 @@ export async function validateChannelMember(uid, member){
         return {
             valid: false,
             msg: `El miembro ${member} no pertenece al canal con id ${uid}"`,
+        }
+    }
+    return {
+        valid: true,
+        msg: null,
+    }
+}
+
+export async function alreadySubscribed(uid, member){
+    const validChannel = await validateChannel(uid);
+    if(!validChannel.valid){
+        return validChannel;
+    }
+    const validMember = await validateUser(member);
+    if(!validMember.valid){
+        return validMember;
+    }
+    const channelMembership = await belongsToChannelUID(uid, member);
+    if(channelMembership){
+        return {
+            valid: false,
+            msg: `El miembro ${member} ya está suscrito al canal con id ${uid}"`,
         }
     }
     return {

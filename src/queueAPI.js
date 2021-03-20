@@ -2,34 +2,33 @@
 import express from 'express';
 import { 
     validateChannelName, 
-    validateMembers, 
+    validateChannel,
     validateChannelOwner,
     validateChannelMember,
     validateUser,
     validateMessage,
+    alreadySubscribed
 } from './validation';
 
 import { 
     createChannel, 
-    deleteChannel, 
+    deleteChannel,
+    subscribeToChannel,
+    unsubscribeFromChannel,  
     getMessages,
-    addMessage 
+    addMessage,
+    getAvailableChannels
 } from './database';
 
 const queueAPI = express.Router();
 
 queueAPI.post('/create', async (req, res) => {
-    const { name, owner, members } = req.body;
+    const { name, owner } = req.body;
     if (!validateChannelName(name).valid) {
         res.status(500).send(validateChannelName(name).msg); 
         return;
     }
-    const validMembers = await validateMembers(members, owner);
-    if (!validMembers.valid) {
-        res.status(500).send(validMembers.msg); 
-        return;
-    }
-    const response = createChannel(name, owner, members);
+    const response = createChannel(name, owner);
     if(response){
         res.send(`Canal "${name}" creado exitosamente`);
     } else {
@@ -52,6 +51,37 @@ queueAPI.post('/delete', async (req, res) => {
     }
 });
 
+queueAPI.post('/subscribe', async (req, res) => {
+    const { uidchannel, uiduser } = req.body;
+    const validAlreadySubscribed = await alreadySubscribed(uidchannel, uiduser);
+    if(!validAlreadySubscribed.valid){
+        res.status(500).send(validAlreadySubscribed.msg); 
+        return;
+    }
+    const response = await subscribeToChannel(uidchannel, uiduser);
+    if(response){
+        res.send(`El usuario "${uiduser}" fue suscrito correctamente al canal con uid "${uidchannel}"`);
+    } else {
+        res.status(500).send(`Error desconocido al suscribir el usuario "${uiduser}" al canal con uid "${uidchannel}"`); 
+    }
+});
+
+queueAPI.post('/unsubscribe', async (req, res) => {
+    const { uidchannel, uiduser } = req.body;
+    const validChannelMember = await validateChannelMember(uidchannel, uiduser);
+    if(!validChannelMember.valid){
+        res.status(500).send(validChannelMember.msg); 
+        return;
+    }
+    const response = await unsubscribeFromChannel(uidchannel, uiduser);
+    //const response = true;
+    if(response){
+        res.send(`El usuario "${uiduser}" fue removido correctamente del canal con uid "${uidchannel}"`);
+    } else {
+        res.status(500).send(`Error desconocido al remover el usuario "${uiduser}" del canal con uid "${uidchannel}"`); 
+    }
+});
+
 queueAPI.post('/list', async (req, res) => {
     const { member } = req.body;
     const validMember = await validateUser(member);
@@ -63,6 +93,7 @@ queueAPI.post('/list', async (req, res) => {
     res.send(messages);
 
 });
+
 
 queueAPI.post('/sendmessage', async (req, res) => {
     const { channeluid, memberuid, content } = req.body;
@@ -82,6 +113,17 @@ queueAPI.post('/sendmessage', async (req, res) => {
         res.status(500).send(`Error desconocido en el envío del mensaje`); 
     }
 
+});
+
+queueAPI.post('/listavailable', async (req, res) => {
+    const { user } = req.body;
+    const validUser = await validateUser(user);
+    if(!validUser.valid){
+        res.status(500).send(validUser.msg); 
+        return;
+    }
+    const channels = await getAvailableChannels(user);
+    res.send(channels);
 });
 
 export default queueAPI;
