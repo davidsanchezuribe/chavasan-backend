@@ -2,7 +2,6 @@
 import express from 'express';
 import { 
     validateChannelName, 
-    validateChannel,
     validateChannelOwner,
     validateChannelMember,
     validateUser,
@@ -97,6 +96,7 @@ queueAPI.post('/list', async (req, res) => {
 
 queueAPI.post('/sendmessage', async (req, res) => {
     const { channeluid, memberuid, content } = req.body;
+    // desencriptar content usando el memberuid
     const validChannelMember = await validateChannelMember(channeluid, memberuid);
     if(!validChannelMember.valid){
         res.status(500).send(validChannelMember.msg); 

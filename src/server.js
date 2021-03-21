@@ -25,6 +25,7 @@ const port = env.expressPort;
     console.log(`listen on port ${port}`);
 });*/ 
 
+//JHON SSL
 dbInit().then(() => {
     app.listen(port, () => {
         console.log(`listen on port ${port}`);
