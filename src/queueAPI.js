@@ -23,8 +23,9 @@ const queueAPI = express.Router();
 
 queueAPI.post('/create', async (req, res) => {
     const { name, owner } = req.body;
-    if (!validateChannelName(name).valid) {
-        res.status(500).send(validateChannelName(name).msg); 
+    const validName = await validateChannelName(name);
+    if (!validName.valid) {
+        res.status(500).send(validName.msg); 
         return;
     }
     const response = createChannel(name, owner);

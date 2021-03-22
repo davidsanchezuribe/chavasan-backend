@@ -35,6 +35,11 @@ export async function createChannel(name, owner) {
     return response.result.ok === 1;
 }
 
+export async function channelNameExists(name) {
+    const count = await db.collection('queues').find({ 'name': name }).count();
+    return count > 0;
+}
+
 export async function deleteChannel(uid) {
     const response = await db.collection('queues').deleteOne({ 'uid': uid })
     return response.result.ok === 1 && response.result.n === 1;

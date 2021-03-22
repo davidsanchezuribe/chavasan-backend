@@ -2,10 +2,11 @@ import {
     userExists, 
     channelExists, 
     checkChannelOwnership, 
-    belongsToChannelUID 
+    belongsToChannelUID,
+    channelNameExists 
 } from './database';
 
-export function validateChannelName(name){
+export async function validateChannelName(name){
     if(name === undefined){
         return {
             valid: false,
@@ -17,6 +18,14 @@ export function validateChannelName(name){
             valid: false,
             msg: 'El parámetro name, nombre del canal, debe ser un string',
         }
+    }
+
+    const nameTaken = await channelNameExists(name);
+    if(nameTaken){
+        return {
+            valid: false,
+            msg: `El canal con nombre ${name} ya existe`,
+        } 
     }
     return {
         valid: true,
