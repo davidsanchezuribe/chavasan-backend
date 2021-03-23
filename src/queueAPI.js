@@ -19,6 +19,8 @@ import {
     getAvailableChannels
 } from './databasememory';
 
+import CryptoJS from 'crypto-js';
+
 const queueAPI = express.Router();
 
 queueAPI.post('/create', async (req, res) => {
@@ -102,7 +104,6 @@ queueAPI.post('/list', async (req, res) => {
 
 queueAPI.post('/sendmessage', async (req, res) => {
     const { channeluid, memberuid, content } = req.body;
-    // desencriptar content usando el memberuid
     const validChannelMember = await validateChannelMember(channeluid, memberuid);
     if(!validChannelMember.valid){
         res.status(500).send(validChannelMember.msg); 
@@ -112,7 +113,8 @@ queueAPI.post('/sendmessage', async (req, res) => {
         res.status(500).send(validateMessage(content).msg); 
         return;  
     }
-    const response = await addMessage(channeluid, memberuid, content);
+    const cypherMessage = CryptoJS.AES.decrypt(content, memberuid).toString(CryptoJS.enc.Utf8);
+    const response = await addMessage(channeluid, memberuid, cypherMessage);
     if(response){
         res.send(`Mensaje añadido exitosamente`);
     } else {
