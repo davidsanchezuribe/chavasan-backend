@@ -2,6 +2,7 @@ import MongoClient from 'mongodb';
 import { queues, users } from './model';
 import env from './env';
 import Query from 'query';
+import CryptoJS from 'crypto-js';
 
 const { v4 } = require('uuid');
 // para almacenar la conexión a la base de datos
@@ -91,17 +92,19 @@ export async function getMessages(memberuid) {
 
 
 export async function addMessage(channeluid, memberuid, message) {
-    const newMessage = {
-        uid: v4(),
-        creator: memberuid,
-        date: Date.now(),
-        text: message,
-        readed: false
-    };
     for(let i = 0; i < queues.length; i++){
         const { uid, members } = queues[i];
         if(uid === channeluid){
             for(let j = 0; j < members.length; j++){
+                const { id } = members[j];
+                const cypherMessage = CryptoJS.AES.encrypt(message, id).toString();
+                const newMessage = {
+                    uid: v4(),
+                    creator: memberuid,
+                    date: Date.now(),
+                    text: cypherMessage,
+                    readed: false
+                };
                 members[j].messages.push(newMessage);
             }         
         }

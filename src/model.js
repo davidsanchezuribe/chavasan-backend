@@ -8,101 +8,17 @@ export const queues = [
             {
                 id: "SQOeRG1avvVsqgzJequgQMLgKSx1",
                 messages: [
-                    {
-                        uid: "64fbea18-1dbe-4f63-9437-88aba04b4420",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Probando el chat",
-                        readed: false,
-                    },
-                    {
-                        uid: "61fd35b6-fe12-4083-95a1-302ca5576348",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Si funciona",
-                        readed: false,
-                    },
-                    {
-                        uid: "c0453d21-63c7-4f95-ace9-8e4c016021fb",
-                        creator: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
-                        date: Date.now(),
-                        text: "Excelente",
-                        readed: false,
-                    },
-                    {
-                        uid: "572a4df7-6042-4bd2-9134-d59308636379",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Mensajes recibidos",
-                        readed: false,
-                    },
                 ],
             },
             {
                 id: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
                 messages: [
-                    {
-                        uid: "64fbea18-1dbe-4f63-9437-88aba04b4420",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Probando el chat",
-                        readed: false,
-                    },
-                    {
-                        uid: "61fd35b6-fe12-4083-95a1-302ca5576348",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Si funciona",
-                        readed: false,
-                    },
-                    {
-                        uid: "c0453d21-63c7-4f95-ace9-8e4c016021fb",
-                        creator: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
-                        date: Date.now(),
-                        text: "Excelente",
-                        readed: false,
-                    },
-                    {
-                        uid: "572a4df7-6042-4bd2-9134-d59308636379",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Mensajes recibidos",
-                        readed: false,
-                    },
                 ],
 
             },
             {
                 id: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
                 messages: [
-                    {
-                        uid: "64fbea18-1dbe-4f63-9437-88aba04b4420",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Probando el chat",
-                        readed: false,
-                    },
-                    {
-                        uid: "61fd35b6-fe12-4083-95a1-302ca5576348",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Si funciona",
-                        readed: false,
-                    },
-                    {
-                        uid: "c0453d21-63c7-4f95-ace9-8e4c016021fb",
-                        creator: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
-                        date: Date.now(),
-                        text: "Excelente",
-                        readed: false,
-                    },
-                    {
-                        uid: "572a4df7-6042-4bd2-9134-d59308636379",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Mensajes recibidos",
-                        readed: false,
-                    },
                 ],
             }
         ]
@@ -116,67 +32,11 @@ export const queues = [
             {
                 id: "SQOeRG1avvVsqgzJequgQMLgKSx1",
                 messages: [
-                    {
-                        uid: "64fbea18-1dbe-4f63-9437-88aba04b4420",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Oe",
-                        readed: false,
-                    },
-                    {
-                        uid: "61fd35b6-fe12-4083-95a1-302ca5576348",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Está funcionando",
-                        readed: false,
-                    },
-                    {
-                        uid: "c0453d21-63c7-4f95-ace9-8e4c016021fb",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Si",
-                        readed: false,
-                    },
-                    {
-                        uid: "572a4df7-6042-4bd2-9134-d59308636379",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Excelente",
-                        readed: false,
-                    },
                 ],
             },
             {
                 id: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
                 messages: [
-                    {
-                        uid: "64fbea18-1dbe-4f63-9437-88aba04b4420",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Oe",
-                        readed: false,
-                    },
-                    {
-                        uid: "61fd35b6-fe12-4083-95a1-302ca5576348",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Está funcionando",
-                        readed: false,
-                    },
-                    {
-                        uid: "c0453d21-63c7-4f95-ace9-8e4c016021fb",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Si",
-                        readed: false,
-                    },
-                    {
-                        uid: "572a4df7-6042-4bd2-9134-d59308636379",
-                        creator: "SQOeRG1avvVsqgzJequgQMLgKSx1",
-                        date: Date.now(),
-                        text: "Excelente",
-                        readed: false,
-                    },
                 ],
             }
         ]
@@ -191,67 +51,11 @@ export const queues = [
             {
                 id: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
                 messages: [
-                    {
-                        uid: "64fbea18-1dbe-4f63-9437-88aba04b4420",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Oe",
-                        readed: false,
-                    },
-                    {
-                        uid: "61fd35b6-fe12-4083-95a1-302ca5576348",
-                        creator: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
-                        date: Date.now(),
-                        text: "Está funcionando",
-                        readed: false,
-                    },
-                    {
-                        uid: "c0453d21-63c7-4f95-ace9-8e4c016021fb",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Si",
-                        readed: false,
-                    },
-                    {
-                        uid: "572a4df7-6042-4bd2-9134-d59308636379",
-                        creator: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
-                        date: Date.now(),
-                        text: "Excelente",
-                        readed: false,
-                    },
                 ],
             },
             {
                 id: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
                 messages: [
-                    {
-                        uid: "64fbea18-1dbe-4f63-9437-88aba04b4420",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Oe",
-                        readed: false,
-                    },
-                    {
-                        uid: "61fd35b6-fe12-4083-95a1-302ca5576348",
-                        creator: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
-                        date: Date.now(),
-                        text: "Está funcionando",
-                        readed: false,
-                    },
-                    {
-                        uid: "c0453d21-63c7-4f95-ace9-8e4c016021fb",
-                        creator: "XxQ1KHSdUaMMhOoQhc8cgtuiNjK2",
-                        date: Date.now(),
-                        text: "Si",
-                        readed: false,
-                    },
-                    {
-                        uid: "572a4df7-6042-4bd2-9134-d59308636379",
-                        creator: "SyDSgRDnu6cmoRmCMYuP0cslVDs1",
-                        date: Date.now(),
-                        text: "Excelente",
-                        readed: false,
-                    },
                 ],
             }
         ]
