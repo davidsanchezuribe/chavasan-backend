@@ -11,42 +11,33 @@ import userAPI from './userAPI.js';
 import env from './env';
 import { dbInit } from './databasememory';
 
-/*
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
-var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+import fs from 'fs';
+import http from 'http';
+import https from 'https';
+import path from 'path';
 
-var credentials = {key: privateKey, cert: certificate};
-var express = require('express');
-var app = express();
-
-var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
-
-httpServer.listen(8080);
-httpsServer.listen(8443);
-*/
+const port = env.expresshttpsPort;
+const { expresshttpPort, expresshttpsPort } = env;
 
 const app = express();
 app.use(bodyParser.json());
-// para permitir el origen desde localhost:3000
 app.use(cors());
-
 app.use('/queue', queueAPI);
 app.use('/user', userAPI);
 
-const port = env.expressPort;
-
-/*app.listen(port, () => {
-    console.log(`listen on port ${port}`);
-});*/ 
+const privateKey  = fs.readFileSync(path.resolve('dist', 'server.key'), 'utf8');
+const certificate = fs.readFileSync(path.resolve('dist', 'server.crt'), 'utf8');
+const credentials = {key: privateKey, cert: certificate};
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
 
 //JHON SSL
 dbInit().then(() => {
-    app.listen(port, () => {
-        console.log(`listen on port ${port}`);
+    httpServer.listen(expresshttpPort, () => {      
+        console.log(`listen on port ${expresshttpPort}`);
+    });
+    httpsServer.listen(expresshttpsPort, () => {      
+        console.log(`listen on port ${expresshttpsPort}`);
     }); 
 }).catch(error => {
     console.log(error);
