@@ -4,7 +4,7 @@ import {
     checkChannelOwnership, 
     belongsToChannelUID,
     channelNameExists 
-} from './database';
+} from './databasememory';
 
 export async function validateChannelName(name){
     if(name === undefined){

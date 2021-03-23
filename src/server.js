@@ -9,7 +9,7 @@ import queueAPI from './queueAPI.js';
 import userAPI from './userAPI.js';
 
 import env from './env';
-import { dbInit } from './database';
+import { dbInit } from './databasememory';
 
 const app = express();
 app.use(bodyParser.json());

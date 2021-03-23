@@ -17,12 +17,17 @@ import {
     getMessages,
     addMessage,
     getAvailableChannels
-} from './database';
+} from './databasememory';
 
 const queueAPI = express.Router();
 
 queueAPI.post('/create', async (req, res) => {
     const { name, owner } = req.body;
+    const validUser = await validateUser(owner);
+    if (!validUser.valid) {
+        res.status(500).send(validUser.msg); 
+        return;
+    }    
     const validName = await validateChannelName(name);
     if (!validName.valid) {
         res.status(500).send(validName.msg); 

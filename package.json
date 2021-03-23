@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^3.6.4",
+    "query": "github:protobi/query",
     "uuid": "^8.3.2"
   }
 }
