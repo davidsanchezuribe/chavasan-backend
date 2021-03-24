@@ -3,3 +3,5 @@
 npm intall
 
 # Correr la aplicación
+
+npm start
